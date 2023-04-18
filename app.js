@@ -20,6 +20,16 @@ async function recreateDB(){
     console.log("First object saved")}
   ).catch(err=>{
     console.error(err)})
+  let instance2 = new Doctor({name:"Carly", age:28, location:"east"});
+  instance2.save().then(doc=>{
+    console.log("Second object saved")}
+  ).catch(err=>{
+    console.error(err)})
+  let instance3 = new Doctor({name:"John", age:54, location:"west"});
+    instance3.save().then(doc=>{
+      console.log("Third object saved")}
+    ).catch(err=>{
+      console.error(err)})
 }
 let reseed = true;
 if (reseed) { recreateDB();}
@@ -29,6 +39,7 @@ var usersRouter = require('./routes/users');
 var doctorsRouter = require('./routes/doctors');
 var boardRouter = require('./routes/board');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -47,6 +58,7 @@ app.use('/users', usersRouter);
 app.use('/doctors', doctorsRouter);
 app.use('/board', boardRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,6 +4,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
+
+var Doctor = require("./models/doctor");
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+ // Delete everything
+  await Doctor.deleteMany();
+  let instance1 = new
+  Doctor({name:"Rodger", age:32, location:"west"});
+  instance1.save().then(doc=>{
+    console.log("First object saved")}
+    ).catch(err=>{
+    console.error(err)})
+}
+let reseed = true;
+if (reseed) { recreateDB();}
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var doctorsRouter = require('./routes/doctors');

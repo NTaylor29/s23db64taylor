@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+
+  - const image_names = ["doc1", "doc2", "doc3", "doc4", "doc5"]
+  - for (let i = 0; i < 3; i++) {
+    - const random_index = Math.floor(Math.random() * 5)
+    - const image_name = image_names[random_index]
+    img(src=`/images/${image_name}.jpg`, alt=image_name, height="300", width="300")
+  - }

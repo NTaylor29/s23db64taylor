@@ -1,0 +1,9 @@
+extends layout 
+
+block content
+  h1= title
+  - var results = [["Rodger", 32, "west"], ["Carly", 28, "east"], ["John", 54, "west"]]
+  .container-fluid
+    .row
+        each item in results 
+            .col-sm-2 #{item}

@@ -15,11 +15,10 @@ var Doctor = require("./models/doctor");
 async function recreateDB(){
  // Delete everything
   await Doctor.deleteMany();
-  let instance1 = new
-  Doctor({name:"Rodger", age:32, location:"west"});
+  let instance1 = new Doctor({name:"Rodger", age:32, location:"west"});
   instance1.save().then(doc=>{
     console.log("First object saved")}
-    ).catch(err=>{
+  ).catch(err=>{
     console.error(err)})
 }
 let reseed = true;

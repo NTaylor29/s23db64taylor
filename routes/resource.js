@@ -17,4 +17,6 @@ router.put('/doctors/:id', doctor_controller.doctor_update_put);
 router.get('/doctors/:id', doctor_controller.doctor_detail);
 // GET request for list of all doctor items.
 router.get('/doctors', doctor_controller.doctor_list);
+/* GET detail costume page */
+router.get('/detail', doctor_controlers.doctor_view_one_Page);
 module.exports = router;

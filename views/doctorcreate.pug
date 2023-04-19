@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+
+  form(id='DoctorForm', action="/resource/doctors", method="POST")
+    div.form-group
+      label.doctorAttr(for='name') Doctor name
+      input#name(type='text', name='mane')
+    div.form-group
+      label.doctorAttr(for='age') Doctor age
+      input#age(type='number', name='age')
+    div.form-group
+      label.doctorAttr(for='location') Doctor location
+      input#location(type='text', name='location')
+    input(type="submit")
+
+  script.
+    document.forms['DoctorForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error )
+      });
+    });

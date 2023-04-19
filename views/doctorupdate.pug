@@ -1,0 +1,41 @@
+extends layout
+block content
+ h1= title
+ - let doctorid = toShow._id
+ - let doctorname = toShow.name
+ - let doctorage = toShow.age
+ - let doctorlocation = toShow.location
+
+ div.row(class='mb-2')
+   div.mr-1 ID is
+   div #{doctorid}
+ - let actionid = "/resource/doctors/" + doctorid
+ form(id='DoctorForm', action= actionid, method="PUT")
+   div.form-group
+    label.doctorAttr(for='name') Doctor name
+    input#name(type='text', name='name', value= doctorname )
+   div.form-group
+    label.doctorAttr(for='age') Doctor age
+    input#age(type='number', name='age', value= doctorage )
+   div.form-group
+    label.doctorAttr(for='location') Doctor location
+    input#location(type='text', name='location', value= doctorlocation )
+   input(type="submit")
+
+ script.
+   document.forms['DoctorForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+      method: 'PUT',
+      body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+      return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+      alert("Update succeded")
+      // TODO handle body
+    }).catch((error) => {
+      // TODO handle error
+      alert("Update failed " + error )
+    });
+   });

@@ -31,7 +31,7 @@ async function recreateDB(){
     ).catch(err=>{
       console.error(err)})
 }
-let reseed = false;
+let reseed = true;
 if (reseed) { recreateDB();}
 
 var indexRouter = require('./routes/index');

@@ -10,4 +10,6 @@ router.get('/detail', doctor_controlers.doctor_view_one_Page);
 router.get('/create', doctor_controlers.doctor_create_Page);
 /* GET create update page */
 router.get('/update', doctor_controlers.doctor_update_Page);
+/* GET delete doctor page */
+router.get('/delete', doctor_controlers.doctor_delete_Page);
 module.exports = router;

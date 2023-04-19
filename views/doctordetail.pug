@@ -1,0 +1,22 @@
+extends layout
+
+block content
+h1= title
+
+- let doctorid = toShow._id
+- let doctorname = toShow.name
+- let doctorage = toShow.age
+- let doctorlocation = toShow.location
+div
+    div.row
+        div(class='doctorAttr mr-3') Doctor ID is:
+        div #{doctorid}
+    div.row
+        div(class='doctorAttr mr-3') Doctor name is:
+        div #{doctorname}
+    div.row
+        div(class='doctorAttr mr-3') Doctor age is:
+        div #{doctorage}
+    div.row
+        div(class='doctorAttr mr-3') Doctor location is:
+        div #{doctorlocation}

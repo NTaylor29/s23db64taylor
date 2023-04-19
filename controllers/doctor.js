@@ -10,6 +10,7 @@ exports.doctor_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     } 
 };
+
 // VIEWS
 // Handle a show all view
 exports.doctor_view_all_Page = async function(req, res) {
@@ -22,7 +23,8 @@ exports.doctor_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     } 
 };
-// for a specific Doctor.
+
+// Show a specific Doctor
 exports.doctor_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -33,6 +35,7 @@ exports.doctor_detail = async function(req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
+
 // Handle Doctor create on POST.
 exports.doctor_create_post = async function(req, res) {
     console.log(req.body)
@@ -53,10 +56,20 @@ exports.doctor_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
 };
-// Handle Doctor delete form on DELETE.
-exports.doctor_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Doctor delete DELETE ' + req.params.id);
-};
+
+// Handle Doctor delete on DELETE.
+exports.doctor_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Doctor.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
 // Handle Doctor update form on PUT.
 exports.doctor_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)

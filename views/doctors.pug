@@ -3,7 +3,13 @@ extends layout
 block content
   h1= title
   - var items = results
-  .container-fluid
-    .row
-        each i in items 
-            .col-sm-2 #{i}
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch(\"/doctors/update?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.name}(#{item.age}) is #{item.location}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
